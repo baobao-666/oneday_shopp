@@ -7,14 +7,7 @@
     </div>
     <div class="home_title">爱时尚精品屋</div>
     <div class="home_title2">公告：水墨年华，青春无悔</div>
-    <div class="home_nav">
-      <span
-        :class="{active:curIndexs===index}"
-        @click="change(index)"
-        v-for="(item,index) in navList"
-        :key="index"
-      >{{item}}</span>
-    </div>
+    <NavCode  :navList='navList' @change="change" :curIndexs='curIndexs'></NavCode>
     <div class="home_list">
       <div class="home_item" v-for="(item,index) in shoppList" :key="index">
         <div class="home_logo">
@@ -50,7 +43,11 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 import axios from "axios";
+import  NavCode from '@/components/navCode/'
 export default {
+  components:{
+     NavCode
+  },
   data() {
     return {
       navList: ["价格升序↑", "价格降序↓", "销量升序↑", "价格降序↓"],
@@ -64,7 +61,6 @@ export default {
     total(){
       return this.curList.reduce((a,b)=>{
          return a+b.count
-        
       },0)
     },
     ...mapState(['curList'])
