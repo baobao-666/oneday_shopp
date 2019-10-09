@@ -9,7 +9,7 @@
     <div class="home_title2">公告：水墨年华，青春无悔</div>
     <div class="home_nav">
       <span
-        :class="{active:curIndex===index}"
+        :class="{active:curIndexs===index}"
         @click="change(index)"
         v-for="(item,index) in navList"
         :key="index"
@@ -31,7 +31,6 @@
             <b>{{item.price}}</b>
           </div>
           <div
-            :class="{active:curIndexs===index}"
             @click="changes(item)"
             class="text_btn"
           >加入购物车</div>
@@ -56,8 +55,8 @@ export default {
     return {
       navList: ["价格升序↑", "价格降序↓", "销量升序↑", "价格降序↓"],
       shoppList: [],
-      curIndex: 0,
-      curIndexs: null,
+      curIndex: null,
+      curIndexs: 0,
       cartList: []
     };
   },
@@ -83,7 +82,7 @@ export default {
   methods: {
     ...mapMutations(['changes']),
     change(index) {
-      this.curIndex = index;
+      this.curIndexs = index;
       if (index === 0) {
         this.curIndex = this.shoppList.sort((a, b) => {
           return a.price - b.price;
